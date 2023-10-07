@@ -3,7 +3,12 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                echo "Building ....." 
+                echo "Building ....."
+                sh '''
+                ls -ltr
+                pwd
+                echo "Hello-script"
+                ''' 
             }
         }
         stage('Test') { 
