@@ -8,14 +8,6 @@ pipeline {
     environment { 
             USER = 'chary'
     }
-
-    parameters {
-        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-        text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
-        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
-        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
-        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
-    }
     
         
     stages {
@@ -26,6 +18,7 @@ pipeline {
                 ls -ltr
                 pwd
                 echo "Hello from GitHub Push webhook event"
+                printenv
                 ''' 
             }
         }
@@ -39,27 +32,9 @@ pipeline {
                echo "Deploying ....." 
             }
         }
-        stage('Example') {
-            environment { 
-                AUTH = credentials('ssh-auth') 
-            }
-            steps {
-                sh 'printenv'
-            }
-        }
-        stage('Params') {
-            steps {
-                echo "Hello ${params.PERSON}"
-
-                echo "Biography: ${params.BIOGRAPHY}"
-
-                echo "Toggle: ${params.TOGGLE}"
-
-                echo "Choice: ${params.CHOICE}"
-
-                echo "Password: ${params.PASSWORD}"
-            }
+        
     }
+        
     post { 
         always { 
             echo 'I will always run whether job is success or not'
@@ -71,5 +46,4 @@ pipeline {
             echo 'I will run when failure'
         }
     }
-}
 }
