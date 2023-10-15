@@ -1,6 +1,12 @@
 pipeline {
     agent { node {label 'AGENT-1'}}
-
+    options {
+        ansiColor('xterm')
+        timeout(time: 1, unit: 'HOURS') 
+    } 
+    environment { 
+        USER = 'chary'
+    } 
     stages {
         stage('Build') {
             steps {
