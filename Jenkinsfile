@@ -69,7 +69,15 @@ pipeline {
             steps {
                 echo "Hello, ${PERSON}, nice to meet you."
             }
-    }
+        }
+        stage('PROD Deploy'){
+            when {
+                environment name: 'USER', value: 'chary'
+            }
+            steps{
+                echo "deploying to PROD"
+            }
+        }
     }
     post { 
         always { 
