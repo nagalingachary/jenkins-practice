@@ -9,6 +9,7 @@ pipeline {
                 ls -ltr
                 pwd
                 echo 'Hello script'
+                echo 'script is working'
                 '''
             }
         }
